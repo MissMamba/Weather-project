@@ -10,110 +10,124 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,300&family=Cabin:ital@1&display=swap"
+      rel="stylesheet"
+    />
     <title>Weather project</title>
   </head>
   <body>
     <div class="container">
-      <div class="weather">
-        <form>
-          <div class="row">
-            <div class="col-9">
-              <input
-                type="search"
-                placeholder="Enter a city..."
-                class="form-control search-input"
-              />
-            </div>
-            <div class="col-3 p-0">
-              <input
-                type="submit"
-                class="btn btn-primary w-100"
-                value="Search"
-              />
-            </div>
+      <div class="card">
+        <div class="card-body">
+          <form id="city-search">
+            <input
+              type="search"
+              name="Search for City"
+              placeholder="Search for city"
+              class="Search-box w-60"
+              id="city-input"
+            />
+
+            <input
+              type="submit"
+              class="btn btn-light w-60"
+              value="Search"
+              id="btn"
+            />
+          </form>
+          <div class="weather-info">
+            <form id="main-display">
+              <div class="row">
+                <div class="col-6">
+                  <h1 id="current-city">Pretoria</h1>
+                  <ul>
+                    <li>
+                      <span id="current-date"> 15/10/2023 </span>
+                    </li>
+                    <li>
+                      <span id="description">broken clouds</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-lg-6 col-lg-6">
+                  <div class="temperature-container d-flex justify-content-end">
+                    <canvas width="52" height="52"> <img src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="clear"/></canvas>
+                    <div class="temp-display">
+                      <span class="temperature" id="current-temp">15</span>
+                      <span class="unitC">°C</span>
+                      <span class="unitF">°F</span>
+                      <ul>
+                        <li>
+                          Humidity:
+                          <span id="humidity"></span>"93" "%"
+                        </li>
+                        <li>
+                          Wind:
+                          <span id="wind"></span>"6.17" "km/h"
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
-        <div class="weatherInfo">
-          <div class="row">
-            <div class="col-6">
-              <h1>Pretoria</h1>
-              <ul>
-                <li>
-                  <span> "Sunday" "07" ":" "59" </span>
-                  "," "broken clouds"
-                </li>
-                <li>
-                  "Humidity: "
-                  <strong>"93" "%" </strong>
-                  ", Wind: "
-                  <strong>"6.17" "km/h"</strong>
-                </li>
-              </ul>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-8">
-              <div class="temperature-container d-flex justify-content-end">
-                <canvas width="52" height="52"></canvas>
-                <div>
-                  <span class="temperature">15</span>
-                  <span class="unitC">°C</span>
-                  <span class="unitF">°F</span>
+          <div class="weatherForecast row">
+            <div class="col">
+              <div class="weatherForecastPreview">
+                <div class="forecastTime">Sat</div>
+                <canvas width="38" height="38"></canvas>
+                <div class="forecastTemp">
+                  <span class="forecastTempMin">15°</span>
+                  <span class="forecastTempMax">19°</span>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="weatherForecast row">
-          <div class="col">
-            <div class="weatherForecastPreview">
-              <div class="forecastTime">Sat</div>
-              <canvas width="38" height="38"></canvas>
-              <div class="forecastTemp">
-                <span class="forecastTempMin">15°</span>
-                <span class="forecastTempMax">19°</span>
+            <div class="col">
+              <div class="weatherForecastPreview">
+                <div class="forecastTime">Sun</div>
+                <canvas width="38" height="38"></canvas>
+                <div class="forecastTemp">
+                  <span class="forecastTempMin">15°</span>
+                  <span class="forecastTempMax">19°</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="weatherForecastPreview">
-              <div class="forecastTime">Sun</div>
-              <canvas width="38" height="38"></canvas>
-              <div class="forecastTemp">
-                <span class="forecastTempMin">15°</span>
-                <span class="forecastTempMax">19°</span>
+            <div class="col">
+              <div class="weatherForecastPreview">
+                <div class="forecastTime">Mon</div>
+                <canvas width="38" height="38"></canvas>
+                <div class="forecastTemp">
+                  <span class="forecastTempMin">15°</span>
+                  <span class="forecastTempMax">19°</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="weatherForecastPreview">
-              <div class="forecastTime">Mon</div>
-              <canvas width="38" height="38"></canvas>
-              <div class="forecastTemp">
-                <span class="forecastTempMin">15°</span>
-                <span class="forecastTempMax">19°</span>
+            <div class="col">
+              <div class="weatherForecastPreview">
+                <div class="forecastTime">Tue</div>
+                <canvas width="38" height="38"></canvas>
+                <div class="forecastTemp">
+                  <span class="forecastTempMin">15°</span>
+                  <span class="forecastTempMax">19°</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col">
-            <div class="weatherForecastPreview">
-              <div class="forecastTime">Tue</div>
-              <canvas width="38" height="38"></canvas>
-              <div class="forecastTemp">
-                <span class="forecastTempMin">15°</span>
-                <span class="forecastTempMax">19°</span>
+            <div class="col">
+              <div class="weatherForecastPreview">
+                <div class="forecastTime">Wed</div>
+                <canvas width="38" height="38"></canvas>
+                <div class="forecastTemp">
+                  <span class="forecastTempMin">15°</span>
+                  <span class="forecastTempMax">19°</span>
+                </div>
               </div>
             </div>
+            <footer>"This project was coded by"</footer>
           </div>
-          <div class="col">
-            <div class="weatherForecastPreview">
-              <div class="forecastTime">Wed</div>
-              <canvas width="38" height="38"></canvas>
-              <div class="forecastTemp">
-                <span class="forecastTempMin">15°</span>
-                <span class="forecastTempMax">19°</span>
-              </div>
-            </div>
-          </div>
-          <footer>"This project was coded by"</footer>
         </div>
       </div>
     </div>
