@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/styles.css" />
+
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -16,117 +16,132 @@
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,300&family=Cabin:ital@1&display=swap"
       rel="stylesheet"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="src/styles.css" />
     <title>Weather project</title>
   </head>
   <body>
     <div class="container">
-      <div class="card">
-        <div class="card-body">
-          <form id="city-search">
-            <input
-              type="search"
-              name="Search for City"
-              placeholder="Search for city"
-              class="Search-box w-60"
-              id="city-input"
-            />
-
-            <input
-              type="submit"
-              class="btn btn-light w-60"
-              value="Search"
-              id="btn"
-            />
-          </form>
-          <div class="weather-info">
-            <form id="main-display">
+      <div weather-app-wrapper>
+        <div class="card ">
+          <div class="card-body">
+            <form id="city-search" class="mb-3">
               <div class="row">
-                <div class="col-6">
-                  <h1 id="current-city">Pretoria</h1>
-                  <ul>
-                    <li>
-                      <span id="current-date"> 15/10/2023 </span>
-                    </li>
-                    <li>
-                      <span id="description">broken clouds</span>
-                    </li>
-                  </ul>
+                <div class="col-9">
+                  <input
+                    type="search"
+                    name="Search for City.."
+                    placeholder="Search for city"
+                    class="form-control"
+                    id="city-input"
+                    autocomplete="off"
+                  />
                 </div>
-                <div class="col-lg-6 col-lg-6">
-                  <div class="temperature-container d-flex justify-content-end">
-                    <canvas width="52" height="52"> <img src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="clear"/></canvas>
-                    <div class="temp-display">
-                      <span class="temperature" id="current-temp">15</span>
-                      <span class="unitC">°C</span>
-                      <span class="unitF">°F</span>
-                      <ul>
+                <div class="col-3">
+                  <input
+                    type="submit"
+                    class="btn btn-light w-60"
+                    value="Search"
+                    id="btn"
+                  />
+                </div>
+              </div>
+            </form>
+            <div class="weather-info">
+              <form id="main-info">
+                <div class="row">
+                  <div class="col">
+                    <h1 id="current-city">Pretoria</h1>
+                    <ul id="current-info">
+                      <li>
+                        <span id="current-date"> 15/10/2023 </span>
+                      </li>
+                      <li>
+                        <span id="description">broken clouds</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-6">
+                    <div class="weather-temperature">
+                      <img
+                        src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
+                        alt="clear"
+                        id="icon"
+                      />
+                      <div class="temp-display">
+                        <span class="temperature" id="current-temp">15</span>
+                        <span class="unit-c">°C</span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <ul id="extra-info">
                         <li>
-                          Humidity:
-                          <span id="humidity"></span>"93" "%"
-                        </li>
+                        Humidity:<span id="humidity"></span> </li>
                         <li>
-                          Wind:
-                          <span id="wind"></span>"6.17" "km/h"
+                          Wind:<span id="wind"></span>km/h
                         </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
-          </div>
-          <div class="weatherForecast row">
-            <div class="col">
-              <div class="weatherForecastPreview">
-                <div class="forecastTime">Sat</div>
-                <canvas width="38" height="38"></canvas>
-                <div class="forecastTemp">
-                  <span class="forecastTempMin">15°</span>
-                  <span class="forecastTempMax">19°</span>
+              </form>
+            </div>
+            <br/>
+            <footer class="banner">
+            <div class="weatherForecast row">
+              <div class="col">
+                <div class="weatherForecastPreview">
+                  <div class="forecastTime">Sat</div>
+                  <canvas width="38" height="38"></canvas>
+                  <div class="forecastTemp">
+                    <span class="forecastTempMin">15°</span>
+                    <span class="forecastTempMax">19°</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="weatherForecastPreview">
-                <div class="forecastTime">Sun</div>
-                <canvas width="38" height="38"></canvas>
-                <div class="forecastTemp">
-                  <span class="forecastTempMin">15°</span>
-                  <span class="forecastTempMax">19°</span>
+              <div class="col">
+                <div class="weatherForecastPreview">
+                  <div class="forecastTime">Sun</div>
+                  <canvas width="38" height="38"></canvas>
+                  <div class="forecastTemp">
+                    <span class="forecastTempMin">15°</span>
+                    <span class="forecastTempMax">19°</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="weatherForecastPreview">
-                <div class="forecastTime">Mon</div>
-                <canvas width="38" height="38"></canvas>
-                <div class="forecastTemp">
-                  <span class="forecastTempMin">15°</span>
-                  <span class="forecastTempMax">19°</span>
+              <div class="col">
+                <div class="weatherForecastPreview">
+                  <div class="forecastTime">Mon</div>
+                  <canvas width="38" height="38"></canvas>
+                  <div class="forecastTemp">
+                    <span class="forecastTempMin">15°</span>
+                    <span class="forecastTempMax">19°</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="weatherForecastPreview">
-                <div class="forecastTime">Tue</div>
-                <canvas width="38" height="38"></canvas>
-                <div class="forecastTemp">
-                  <span class="forecastTempMin">15°</span>
-                  <span class="forecastTempMax">19°</span>
+              <div class="col">
+                <div class="weatherForecastPreview">
+                  <div class="forecastTime">Tue</div>
+                  <canvas width="38" height="38"></canvas>
+                  <div class="forecastTemp">
+                    <span class="forecastTempMin">15°</span>
+                    <span class="forecastTempMax">19°</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col">
-              <div class="weatherForecastPreview">
-                <div class="forecastTime">Wed</div>
-                <canvas width="38" height="38"></canvas>
-                <div class="forecastTemp">
-                  <span class="forecastTempMin">15°</span>
-                  <span class="forecastTempMax">19°</span>
+              <div class="col">
+                <div class="weatherForecastPreview">
+                  <div class="forecastTime">Wed</div>
+                  <canvas width="38" height="38"></canvas>
+                  <div class="forecastTemp">
+                    <span class="forecastTempMin">15°</span>
+                    <span class="forecastTempMax">19°</span>
+                  </div>
                 </div>
               </div>
+              </footer>
+              <p>"This project was coded by"</p>
             </div>
-            <footer>"This project was coded by"</footer>
           </div>
         </div>
       </div>
