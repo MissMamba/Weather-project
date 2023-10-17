@@ -50,10 +50,13 @@ li {
   font-weight: 100;
   font-family: "Courier New", Courier, monospace;
   font-style: oblique;
-  text-transform: capitalize;
   color: rgb(51, 51, 51);
   list-style: none;
   margin-top: 2px;
+}
+
+li:first-letter{
+text-transform: capitalize;
 }
 #icon {
   position: absolute;
