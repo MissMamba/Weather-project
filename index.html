@@ -18,6 +18,7 @@
     />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/styles.css" />
+    
     <title>Weather project</title>
   </head>
   <body>
@@ -51,32 +52,39 @@
               <form id="main-info">
                 <div class="row">
                   <div class="col">
-                    <h1 id="current-city">Pretoria</h1>
+                    <h1 id="current-city"></h1>
+                    <br/>
+
                     <ul id="current-info">
                       <li>
-                        <span id="current-date"> 15/10/2023 </span>
+                        <span id="current-date"></span>
                       </li>
                       <li>
-                        <span id="description">broken clouds</span>
+                        <span id="description"></span>
                       </li>
                     </ul>
                   </div>
-                  <div class="col-6">
+                  <div class="col-7">
                     <div class="weather-temperature">
                       <img
-                        src="https://ssl.gstatic.com/onebox/weather/64/sunny.png"
-                        alt="clear"
+                        src=""
+                        alt=""
                         id="icon"
                       />
                       <div class="temp-display">
                         <span class="temperature" id="current-temp"></span>
-                        <span class="unit-c">°C</span>
+                        <span class="units">
+                          <a href="#" id="celsius-link" class="active">°C| </a>
+                          <a href="#" id="fahrenheit-link" class="active">°F</a>
+                        </span>
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-5">
                       <ul id="extra-info">
                         <li>
-                        Humidity:<span id="humidity"></span> </li>
+                        Humidity:<span id="humidity"></span> 
+                       %
+                      </li>
                         <li>
                           Wind:<span id="wind"></span>km/h
                         </li>
@@ -140,7 +148,9 @@
                 </div>
               </div>
               </footer>
-              <p>"This project was coded by"</p>
+              <br/>
+              <p class="sourceCode">
+                <a href="">open-source code </a> This project was coded by Ms Mamba</p>
             </div>
           </div>
         </div>
