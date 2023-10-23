@@ -39,12 +39,8 @@ function displayTemperature(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   dateElement.innerHTML = formatDate(response.data.time * 1000);
 
-  iconElement.setAttribute(
-    "src",
-    `${response.data.condition.icon_url}`
-  );
-  iconElement.setAttribute(
-    "alt",response.data.condition.description);
+  iconElement.setAttribute("src", `${response.data.condition.icon_url}`);
+  iconElement.setAttribute("alt", response.data.condition.description);
 }
 
 function search(city) {
@@ -78,6 +74,33 @@ function displayCelsiusTemp(event) {
   fahrenheitLink.classList.remove("active");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Thursday", "Friday", "Saturday", "Sunday"];
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      ` 
+            <div class="col">
+                  <div class="forecast-date"> ${day}  </div>
+                    <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png"
+                    alt="weather icon"
+                    id="forecast-icon"
+                    width="50"/>
+                   <div class="forecast-temp">
+                    <span class="forecastTempMin">15°</span>
+                    <span class="forecastTempMax">19°</span>
+                  </div>
+                </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+displayForecast();
 
 let celsiusTemperature = null;
 
