@@ -1,27 +1,75 @@
-let date = new Date();
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let hours = date.getHours();
-if (hours < 10) {
-  hours = `0${hours}`;
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let day = days[date.getDay()];
+  return `${day} ${hours}:${minutes}`;
 }
 
-let minutes = date.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
 }
-let day = days[date.getDay()];
-let currentDate = document.querySelector("#current-date");
-currentDate.innerHTML = `${day} ${hours}:${minutes}`;
 
+function displayForecast(response) {
+  console.log(response.data);
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML +
+        ` 
+            <div class="col-2">
+                  <div class="forecast-date"> ${formatDay(
+                    forecastDay.time
+                  )}  </div>
+                    <img src="${forecastDay.condition.icon_url}"
+                    alt=""
+                    id="forecast-icon"
+                    width="42"/>
+                   <div class="forecast-temp">
+                    <span class="forecast-temp-min"> ${Math.round(
+                      forecastDay.temperature.minimum
+                    )}° </span>
+                    <span class="forecast-temp-max"> ${Math.round(
+                      forecastDay.temperature.maximum
+                    )}° </span>
+                  </div>
+                </div>`;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let apiKey = "a4dbff3fb9894f32e6a77bt933fco6a0";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lat=${coordinates.latitude}&lon=${coordinates.longitude}&key=${apiKey}&units=metric
+`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
 function displayTemperature(response) {
   let tempElement = document.querySelector("#current-temp");
   let cityElement = document.querySelector("#current-city");
@@ -40,7 +88,8 @@ function displayTemperature(response) {
   dateElement.innerHTML = formatDate(response.data.time * 1000);
 
   iconElement.setAttribute("src", `${response.data.condition.icon_url}`);
-  iconElement.setAttribute("alt", response.data.condition.description);
+  iconElement.setAttribute("alt", `${response.data.condition.description}`);
+  getForecast(response.data.coordinates);
 }
 
 function search(city) {
@@ -53,10 +102,6 @@ function handleSubmit(event) {
   let cityInputElement = document.querySelector("#city-input");
   search(cityInputElement.value);
 }
-search("New York");
-
-let form = document.querySelector("#city-search");
-form.addEventListener("submit", handleSubmit);
 
 function displayFahrenheitTemp(event) {
   event.preventDefault();
@@ -75,32 +120,8 @@ function displayCelsiusTemp(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
-function displayForecast() {
-  let forecastElement = document.querySelector("#forecast");
-
-  let days = ["Thursday", "Friday", "Saturday", "Sunday"];
-  let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      ` 
-            <div class="col">
-                  <div class="forecast-date"> ${day}  </div>
-                    <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png"
-                    alt="weather icon"
-                    id="forecast-icon"
-                    width="50"/>
-                   <div class="forecast-temp">
-                    <span class="forecastTempMin">15°</span>
-                    <span class="forecastTempMax">19°</span>
-                  </div>
-                </div>`;
-  });
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
-
-displayForecast();
+let form = document.querySelector("#city-search");
+form.addEventListener("submit", handleSubmit);
 
 let celsiusTemperature = null;
 
@@ -109,3 +130,4 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemp);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemp);
+search("Pretoria");

@@ -60,7 +60,7 @@ li:first-letter {
 }
 #icon {
   position: absolute;
-  top: 100px;
+  top: 80px;
 }
 .temp-display {
   text-align: center;
@@ -107,4 +107,7 @@ li:first-letter {
 }
 .forecast-temp {
   font-size: 13px;
+}
+#col-5 {
+  width: 48%;
 }
